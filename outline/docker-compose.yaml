@@ -4,7 +4,7 @@ services:
     restart: always
     container_name: outline_redis
     networks:
-      - outline-internal
+      - outline_internal
 
   outline_postgres:
     image: postgres:15
@@ -17,7 +17,7 @@ services:
       - POSTGRES_USER=outline
       - POSTGRES_DB=outline
     networks:
-      - outline-internal
+      - outline_internal
     volumes:
       - ./container-data/db:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
@@ -98,10 +98,10 @@ services:
       - "traefik.http.services.outline-secure.loadbalancer.server.port=80"
       - "traefik.docker.network=proxy"
     networks:
-      - outline-internal
+      - outline_internal
       - proxy
 
 networks:
-  outline-internal:
+  outline_internal:
   proxy:
     external: true
