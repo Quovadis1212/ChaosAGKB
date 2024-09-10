@@ -46,7 +46,7 @@ services:
     volumes:
       - /srv/docker-data/owncloud:/mnt/data
     networks:
-      - owncloud_network
+      - owncloud_internal
       - proxy
     
 
@@ -69,7 +69,7 @@ services:
     volumes:
       - /srv/docker-data/owncloud_mariadb:/var/lib/mysql
     networks:
-      - owncloud_network
+      - owncloud_internal
 
   redis:
     image: redis:6
@@ -81,13 +81,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    volumes:
-      - /srv/docker-data/owncloud_redis:/data
     networks:
-      - owncloud_network
+      - owncloud_internal
       
 networks:
-  owncloud_network:
+  owncloud_internal:
     external: false
   proxy:
     external: true
