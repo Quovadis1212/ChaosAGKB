@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
-      - keycloak_network
+      - keycloak_internal
 
   keycloak:
     image: quay.io/keycloak/keycloak:23.0.6
@@ -34,7 +34,7 @@ services:
     depends_on:
       - Keycloak_postgres
     networks:
-      - keycloak_network
+      - keycloak_internal
       - proxy
     labels:
       - "traefik.enable=true"
@@ -45,7 +45,7 @@ services:
       - "traefik.docker.network=proxy"
 
 networks:
-  keycloak_network:
+  keycloak_internal:
     external: false
   proxy:
     external: true
